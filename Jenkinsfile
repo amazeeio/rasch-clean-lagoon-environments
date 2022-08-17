@@ -78,14 +78,13 @@ spec:
           stage('Checkout and Setup') {
             container('alpine') {
               checkout scm
-              sh 'ls'
               sh 'apk add --no-cache openssh bash jq coreutils'
             }
           }
           stage('Clean Environments') {
             container('alpine') {
                 sh """ eval `ssh-agent -s`
-                      ssh-add $LAGOON_CLI_SSH_KEY_FILE
+                      ssh-add '$LAGOON_CLI_SSH_KEY_FILE'
                       ./runcleanup.sh
                 """
             }
