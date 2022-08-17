@@ -77,6 +77,7 @@ spec:
         'PROJECTS=beobachter-k8s-buildperf,handelszeitung-k8s-buildperf,beobachter-k8s,expero-k8s,gaultmillau-k8s,handelszeitung-k8s,schweizer-illustrierte-k8s,streaming-k8s,illustre-k8s,pme-k8s']) {
           stage('Checkout and Setup') {
             container('alpine') {
+              checkout scm
               sh 'ls'
               sh 'apk add --no-cache openssh bash jq coreutils'
             }
