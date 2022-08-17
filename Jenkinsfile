@@ -84,10 +84,10 @@ spec:
           }
           stage('Clean Environments') {
             container('alpine') {
-                // sh """ eval `ssh-agent -s`
-                //       ssh-add $LAGOON_CLI_SSH_KEY_FILE
-                //       ./runcleanup.sh
-                // """
+                sh """ eval `ssh-agent -s`
+                      ssh-add $LAGOON_CLI_SSH_KEY_FILE
+                      ./runcleanup.sh
+                """
             }
           }
       } //ends withEnv
