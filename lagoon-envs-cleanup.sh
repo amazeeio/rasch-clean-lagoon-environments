@@ -161,6 +161,8 @@ github_pr_query_delete() {
 	GITHUB_PR_UPDATE=$(echo $GITHUB_PR|jq -r .updated_at| xargs -I {} bash -c "gnudate {}")
 	echo "PR $3 is $GITHUB_PR_STATUS and updated on $GITHUB_PR_UPDATE"
 
+	echo "GITHUB_PR_STATUS=$GITHUB_PR_STATUS GITHUB_PR_UPDATE=$GITHUB_PR_UPDATE CLEAN_DATE=$CLEAN_DATE"
+
 	# Invoke clean function *only* if the PR is closed and last update date is before N months.
 	if [ "$GITHUB_PR_STATUS" = "closed" -a $GITHUB_PR_UPDATE -le $CLEAN_DATE ]; then
 		echo "Delete environment ${env} true"
