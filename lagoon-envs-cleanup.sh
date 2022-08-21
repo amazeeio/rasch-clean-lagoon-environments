@@ -149,10 +149,9 @@ github_pr_query_delete() {
 
 	# Retrieve the PR
 	GITHUB_PR=$(curl -s -k -H "$GITHUB_BEARER_TOKEN" $GITHUB_ENDPOINT/repos/$1/$2/pulls/$3)
-	echo $GITHUB_PR
+	
 	# Retrieve the status of a PR
 	GITHUB_PR_STATUS=$(echo $GITHUB_PR|jq -r .state)
-	echo $GITHUB_PR_STATUS
 	if [ "$GITHUB_PR_STATUS" = "open" ]; then
 		echo -e "Environment ${env} is not deleted because PR's status (open)"
 		return 1
@@ -161,8 +160,6 @@ github_pr_query_delete() {
 	# Retrieve the lastupdate time of a PR
 	GITHUB_PR_UPDATE=$(echo $GITHUB_PR|jq -r .updated_at| xargs -I {} bash -c "gnudate {}")
 	echo "PR $3 is $GITHUB_PR_STATUS and updated on $GITHUB_PR_UPDATE"
-
-	echo "GITHUB_PR_STATUS=$GITHUB_PR_STATUS GITHUB_PR_UPDATE=$GITHUB_PR_UPDATE CLEAN_DATE=$CLEAN_DATE"
 
 	# Invoke clean function *only* if the PR is closed and last update date is before N months.
 	if [ "$GITHUB_PR_STATUS" = "closed" -a $GITHUB_PR_UPDATE -le $CLEAN_DATE ]; then
