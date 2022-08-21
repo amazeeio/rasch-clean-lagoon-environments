@@ -149,7 +149,10 @@ github_pr_query_delete() {
 
 	# Retrieve the PR
 	GITHUB_PR=$(curl -s -k -H "$GITHUB_BEARER_TOKEN" $GITHUB_ENDPOINT/repos/$1/$2/pulls/$3)
+	echo "Outputting PR details"
+	echo $GITHUB_PR
 	echo $(echo $GITHUB_PR | jq .)
+	echo "End output PR details"
 	# Retrieve the status of a PR
 	GITHUB_PR_STATUS=$(echo $GITHUB_PR|jq -r .state)
 	if [ "$GITHUB_PR_STATUS" = "open" ]; then
