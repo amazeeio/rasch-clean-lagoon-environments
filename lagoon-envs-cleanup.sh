@@ -149,6 +149,7 @@ github_pr_query_delete() {
 
 	# Retrieve the PR
 	GITHUB_PR=$(curl -s -k -H "$GITHUB_BEARER_TOKEN" $GITHUB_ENDPOINT/repos/$1/$2/pulls/$3)
+	echo "token $GITHUB_BEARER_TOKEN"
 	echo "$GITHUB_ENDPOINT/repos/$1/$2/pulls/$3"
 	echo "Outputting PR details"
 	echo $GITHUB_PR
