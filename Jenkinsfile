@@ -71,7 +71,7 @@ spec:
    withCredentials([
      usernamePassword(credentialsId: 'rasch-harbor-secret', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME'),
      sshUserPrivateKey(keyFileVariable: "LAGOON_CLI_SSH_KEY_FILE", credentialsId: "rasch-lagoon-cli-ssh"),
-     string(credentialsId: 'ras-cleanup-github-api-token', variable: 'GITHUB_API_TOKEN')
+     string(credentialsId: 'poleposition-jenkins-github-secret', variable: 'GITHUB_API_TOKEN')
      ]) {
         withEnv(['DOCKER_HOST=tcp://localhost:2375', 'CONTAINER_REPO=rasjenkinstest', 'DOCKER_SERVER=harbor-nginx-lagoon-master.ch.amazee.io',
         'PROJECTS=cash-k8s,beobachter-k8s-buildperf,handelszeitung-k8s-buildperf,beobachter-k8s,expero-k8s,gaultmillau-k8s,handelszeitung-k8s,schweizer-illustrierte-k8s,streaming-k8s,illustre-k8s,pme-k8s']) {
